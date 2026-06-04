@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # root-level screenshots/reference images
 /*.png
+
+# Playwright MCP screenshots
+.playwright-mcp/
