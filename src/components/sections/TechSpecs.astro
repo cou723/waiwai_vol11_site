@@ -7,7 +7,7 @@ import { techSpecs } from '@/data/content';
 import type { TechSpec } from '@/data/content';
 ---
 
-<section id="tech-specs" class="section section--secondary">
+<section id="tech-specs" class="section">
   <div class="container">
     <SectionTitle
       title="v4 技術仕様"
@@ -18,7 +18,6 @@ import type { TechSpec } from '@/data/content';
       {
         techSpecs.map((spec: TechSpec, index: number) => (
           <TechCard
-            class="techspecs__card"
             data-aos="fade-up"
             data-aos-delay={(index * 50).toString()}
           >
@@ -31,6 +30,14 @@ import type { TechSpec } from '@/data/content';
                 ))}
               </ul>
             )}
+            {spec.reference && (
+              <p class="techspecs__reference">
+                参考実装：
+                <a href={spec.reference.href} target="_blank" rel="noopener noreferrer">
+                  {spec.reference.text}
+                </a>
+              </p>
+            )}
           </TechCard>
         ))
       }
@@ -41,35 +48,49 @@ import type { TechSpec } from '@/data/content';
       <ImagePlaceholder caption="スイッチがジグザグに上下配置され、キーキャップの足の長さで打鍵面を水平に揃えている断面を表す図" />
     </div>
 
+    <div class="techspecs__stack" data-aos="fade-up">
+      <h3 class="techspecs__section-title">スタック</h3>
+      <TechCard>
+        <pre class="techspecs__stack-code"><code>ファームウェア  : Rust + Embassy + RMK v0.8 / Raspberry Pi Pico (W)
+手計測アプリ   : React 19 + TypeScript + MediaPipe Tasks Vision + OpenCV.js
+CAD生成       : Deno + TypeScript + Onshape CAD API</code></pre>
+      </TechCard>
+    </div>
+
     <div class="techspecs__flow" data-aos="fade-up">
-      <h3 class="techspecs__flow-title">生成フロー</h3>
+      <h3 class="techspecs__section-title">生成フロー</h3>
       <div class="techspecs__flow-steps">
-        {[
-          { label: '手を撮影', sublabel: 'pag3b-hand-measure' },
-          { label: 'キー配置計算', sublabel: 'pag3b_configurator' },
-          { label: '3Dモデル生成', sublabel: 'STL出力 via Onshape API' },
-          { label: '3Dプリント', sublabel: '筐体・キーキャップ' },
-          { label: '配線・完成', sublabel: 'より線+スイッチ+ダイオード' },
-        ].map((step, i, arr) => (
-          <div class="flow-item">
-            <div class="flow-item__box">
-              <span class="flow-item__label">{step.label}</span>
-              <span class="flow-item__sublabel">{step.sublabel}</span>
+        {
+          [
+            { label: '手を撮影', sublabel: 'pag3b-hand-measure' },
+            { label: 'キー配置計算', sublabel: 'pag3b_configurator' },
+            { label: '3Dモデル生成', sublabel: 'STL出力 via Onshape API' },
+            { label: '3Dプリント', sublabel: '筐体・キーキャップ' },
+            { label: '配線・完成', sublabel: 'より線+スイッチ+ダイオード' },
+          ].map((step, i, arr) => (
+            <div class="flow-item">
+              <div class="flow-item__box">
+                <span class="flow-item__label">{step.label}</span>
+                <span class="flow-item__sublabel">{step.sublabel}</span>
+              </div>
+              {i < arr.length - 1 && (
+                <span class="flow-item__arrow" aria-hidden="true">→</span>
+              )}
             </div>
-            {i < arr.length - 1 && (
-              <span class="flow-item__arrow" aria-hidden="true">→</span>
-            )}
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
 
     <div class="techspecs__coord" data-aos="fade-up">
-      <h3 class="techspecs__flow-title">キー配置の座標系</h3>
+      <h3 class="techspecs__section-title">キー配置の座標系</h3>
       <TechCard>
         <ul class="techspecs__coord-list">
           <li><span class="techspecs__coord-key">原点</span>中指中手骨の近位端</li>
-          <li><span class="techspecs__coord-key">自由度</span>各キーは x / y / z / yaw / roll / pitch の6自由度で配置</li>
+          <li
+            ><span class="techspecs__coord-key">自由度</span>各キーは x / y / z / yaw / roll /
+            pitch の6自由度で配置</li
+          >
           <li><span class="techspecs__coord-key">x・roll</span>同一行で共通値</li>
           <li><span class="techspecs__coord-key">pitch</span>MP関節の円運動の法線から算出</li>
         </ul>
@@ -105,7 +126,7 @@ import type { TechSpec } from '@/data/content';
   .techspecs__details {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 var(--spacing-sm);
   }
 
   .techspecs__details li {
@@ -128,7 +149,13 @@ import type { TechSpec } from '@/data/content';
     margin-bottom: 0;
   }
 
-  .techspecs__flow-title {
+  .techspecs__reference {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    margin: var(--spacing-sm) 0 0;
+  }
+
+  .techspecs__section-title {
     font-family: var(--font-headline);
     font-size: 1.25rem;
     color: var(--color-text-primary);
@@ -141,6 +168,22 @@ import type { TechSpec } from '@/data/content';
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
+  }
+
+  .techspecs__stack {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .techspecs__stack-code {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 0;
+    background: none;
+    padding: 0;
   }
 
   .techspecs__flow {

@@ -4,6 +4,11 @@ export interface ExperienceItem {
   description: string;
 }
 
+export interface DesignPrinciple {
+  title: string;
+  description: string;
+}
+
 export interface ComparisonRow {
   feature: string;
   rowStagger: string;
@@ -28,12 +33,13 @@ export interface TechSpec {
   label: string;
   value: string;
   details?: string[];
+  reference?: { text: string; href: string };
 }
 
 export const projectMeta = {
   name: 'PAG3B',
   fullName: 'Personalized Automatic Generative 3D Backward-tilting Keyboard',
-  tagline: 'あなたの手の形を測定して、あなただけの立体キーボードを自動生成する。',
+  tagline: 'Trace down. Tone up. Touch in.',
 };
 
 export const experienceItems: ExperienceItem[] = [
@@ -52,6 +58,17 @@ export const experienceItems: ExperienceItem[] = [
     step: 3,
     title: 'v4プロトタイプを実際に触る',
     description: '現在動作する実機を体感できます。',
+  },
+];
+
+export const designPhilosophyPrinciples: DesignPrinciple[] = [
+  {
+    title: '運動記憶の最小化',
+    description: '不要な関節運動を排除することで習得コストと腱鞘炎リスクを同時に下げる',
+  },
+  {
+    title: '選択コストの最小化',
+    description: '最適パラメータを「探す」のではなく、手の測定から「決定」する',
   },
 ];
 
@@ -124,6 +141,10 @@ export const techSpecs: TechSpec[] = [
     ],
   },
   {
+    label: '親指キー',
+    value: '巨大なスペースバーを廃止し、親指の自然な可動範囲に合わせた複数の親指キーを配置',
+  },
+  {
     label: '配線方式',
     value: 'PCBレス（より線にスイッチとダイオードを直接刺す）',
     details: [
@@ -131,10 +152,10 @@ export const techSpecs: TechSpec[] = [
       '基板製造の待ち時間なしに即プロトタイプできる',
       '筐体の3D形状に対して自由度の高い配線が可能',
     ],
-  },
-  {
-    label: '座標系',
-    value: '原点：中指中手骨の近位端 / 各キーはx/y/z/yaw/roll/pitchの6自由度で配置',
+    reference: {
+      text: '50an6xy06r6n/hotswap_pcb_generator',
+      href: 'https://github.com/50an6xy06r6n/hotswap_pcb_generator',
+    },
   },
 ];
 
@@ -177,7 +198,7 @@ export const faqItems: FaqItem[] = [
   {
     question: 'QWERTY以外の論理配列と組み合わせられますか？',
     answer:
-      'ファームウェアにRMKを使用しており、論理配列は自由に設定できます。物理配列はColumn stagger系（縦列が揃っている）なので、多くの配列と相性が良いです。なお、このプロジェクトの考えでは論理配列にこだわる前にまず物理配列を自分の手に合わせることが先決だと考えています。',
+      'ファームウェアにRMKを使用しており、論理配列は自由に設定できます。物理配列はColumn stagger系（縦列が揃っている）なので、多くの配列と相性が良いです。なお、このプロジェクトの考えでは論理配列にこだわる前にまず物理配列を自分の手に合わせることが先決だと考えています。PAG3Bの物理配列がある程度完成した暁には、論理配列の設計にも取り組む予定です。',
   },
   {
     question: 'どんな手のサイズに対応していますか？',

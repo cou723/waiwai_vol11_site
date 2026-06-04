@@ -41,12 +41,11 @@ const badges = [
         <p class="hero__fullname">{projectMeta.fullName}</p>
         <h1 class="hero__title">{projectMeta.name}</h1>
         <p class="hero__tagline">{projectMeta.tagline}</p>
-        <p class="hero__en">Measure your hand.<br />Generate your keyboard.</p>
         <div class="hero__cta">
           <TechButton href="#experience" variant="primary" size="lg">
             この展示を体験する
           </TechButton>
-          <TechButton href="#advanced" variant="secondary" size="lg">
+          <TechButton href="#tech-specs" variant="secondary" size="lg">
             技術仕様を見る
           </TechButton>
         </div>
@@ -248,22 +247,16 @@ const badges = [
   }
 
   .hero__tagline {
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    line-height: 1.9;
+    font-family: var(--font-headline);
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.6;
     margin-bottom: var(--spacing-lg);
     color: var(--color-text-secondary);
     max-width: 480px;
-  }
-
-  .hero__en {
-    font-family: var(--font-headline);
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    font-weight: 600;
-    color: var(--color-text-primary);
-    line-height: 1.3;
-    margin-bottom: var(--spacing-lg);
-    opacity: 0.55;
-    letter-spacing: -0.01em;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 0.875em;
+    letter-spacing: 0.01em;
   }
 
   .hero__cta {

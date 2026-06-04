@@ -1,0 +1,73 @@
+---
+import WristAngleDiagram from '@/components/diagrams/WristAngleDiagram.astro';
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+---
+
+<section id="anatomy" class="section section--secondary">
+  <div class="container">
+    <SectionTitle title="解剖学的設計の核心" />
+
+    <div class="anatomy__grid">
+      <TechCard data-aos="fade-up">
+        <h3 class="anatomy__heading">キースイッチの押下方向をMP関節の円運動の法線方向に合わせる</h3>
+        <p>
+          キーを「押す」動作はMP関節（中手指節関節、いわゆる指の付け根）の屈曲を主軸とします。最小限の力で押下するには、スイッチの押下方向がMP関節の円運動の法線ベクトルと一致している必要があります。
+        </p>
+      </TechCard>
+
+      <TechCard data-aos="fade-up" data-aos-delay="80">
+        <h3 class="anatomy__heading">なぜ立体化が必要か</h3>
+        <p>
+          スイッチを法線方向に向けながら手前から奥へ並べようとすると、手前のスイッチが奥のスイッチに物理的に干渉します。つまり立体化は「指の動きが弧を描くから」という理由ではなく、<strong>「スイッチを正しい角度に向けた結果、平面配置が不可能になった」という論理的帰結</strong>です。
+        </p>
+        <p>高さ・前後傾・左右傾の4軸を個人の手の形に合わせて調整します。</p>
+        <ImagePlaceholder caption="スイッチを法線方向に向けた場合の干渉と立体化による解決を表す図" />
+      </TechCard>
+
+      <TechCard data-aos="fade-up" data-aos-delay="160">
+        <h3 class="anatomy__heading">縦ピッチ縮小の意味</h3>
+        <p>
+          一般的なキーピッチでは、数字行（最上段）を打つ際に手首・肘・肩まで動かす必要があります。縦ピッチを詰めることで同じ操作が指関節・手首関節の屈曲伸展のみで完結します。動員する関節が減ることで習得コストが下がり、長時間使用での疲労も軽減します。
+        </p>
+      </TechCard>
+
+      <TechCard data-aos="fade-up" data-aos-delay="240">
+        <h3 class="anatomy__heading">腱鞘炎防止</h3>
+        <p>
+          手根関節を伸展した状態（手首を反らせた状態）でMP・PIP・DIP関節を繰り返し動かすと腱鞘炎の原因になります。PAG3Bは手根関節が自然な軽屈曲状態でキーを操作できる<strong>後傾角（Backward-tilting）</strong>を採用します。
+        </p>
+        <WristAngleDiagram />
+        <ImagePlaceholder caption="手根関節が伸展した状態と軽屈曲状態の比較、およびPAG3Bの後傾角を表す図" />
+      </TechCard>
+    </div>
+  </div>
+</section>
+
+<style>
+  .anatomy__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .anatomy__heading {
+    font-family: var(--font-headline);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+  }
+
+  strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .anatomy__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

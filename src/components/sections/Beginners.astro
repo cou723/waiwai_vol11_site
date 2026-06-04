@@ -1,120 +1,84 @@
 ---
-import FingerArcDiagram from '@/components/diagrams/FingerArcDiagram.astro';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import TechCard from '@/components/ui/TechCard.astro';
+import { designPhilosophyPrinciples } from '@/data/content';
+import type { DesignPrinciple } from '@/data/content';
 ---
 
-<section id="beginners" class="section section--secondary">
+<section id="design-philosophy" class="section section--secondary">
   <div class="container">
     <SectionTitle
-      title="キーボードを始めたばかりの方へ"
-      subtitle="市販のキーボードが抱える問題と、PAG3Bのアプローチ"
+      title="PAG3Bの設計思想"
+      subtitle="あなたが今使っているエルゴノミクスキーボードのパラメータは、誰の手に最適化されていますか？"
     />
 
-    <div class="beginners__body">
-      <div class="beginners__problem" data-aos="fade-up">
-        <h3 class="beginners__heading">今のキーボード、あなたの手に合っていますか？</h3>
-        <p>
-          市販のキーボードは、ほぼすべて<strong>欧米成人男性の手のサイズ</strong>を基準に設計されています。これはタイプライターが発明された19世紀から変わっていない事実です。
-        </p>
-        <p>
-          さらに、タイプライターの時代には機械的な制約から「横にズレた配列（Row stagger）」や「巨大なスペースバー」が生まれました。この設計は100年以上経った今も、ほぼそのまま引き継がれています。
-        </p>
+    <div class="philosophy__intro" data-aos="fade-up">
+      <p>
+        KinesisやCorneは設計者が決めた固定パラメータです。Dactylはすべてのパラメータを自分で調整できますが、自分に最適な値は試行錯誤で探す必要があります。
+      </p>
+      <p>PAG3Bは以下の設計思想を重視しています。</p>
+    </div>
 
-        <div class="beginners__issues">
-          {[
-            '手の小さい人（日本人女性、子供など）は数字行に指が届かない',
-            'ホームポジションから遠いキーに無理に手を伸ばすことで、長時間使用での腱鞘炎リスクが上がる',
-            'タッチタイピングの習得が実際よりずっと難しくなっている',
-          ].map((issue) => (
-            <div class="beginners__issue">
-              <span class="beginners__issue-marker" aria-hidden="true">→</span>
-              <p class="beginners__issue-text">{issue}</p>
-            </div>
-          ))}
-        </div>
-
-        <p class="beginners__solution">
-          PAG3Bはこの問題を根本から解決します。あなたの手を測定し、あなたの手の形・指の長さに合った3Dキーボードを<strong>自動生成</strong>します。
-        </p>
-      </div>
-
-      <TechCard class="beginners__3d-card" data-aos="fade-up" data-aos-delay="100">
-        <h3 class="beginners__heading">「立体」キーボードって何が違うの？</h3>
-        <p>
-          普通のキーボードはすべてのキーが一枚の平面に並んでいます。でも指は平面ではなく、関節の動きに沿って<strong>弧を描いて</strong>動きます。さらに、指を曲げる量によってホームポジションからキーまでの距離が変わるため、<strong>同じキー配置でも人によって「ちょうどいい位置」が違います</strong>。
-        </p>
-        <p>
-          PAG3Bでは、あなた自身の指の長さから「どの位置にキーがあると一番自然に押せるか」を計算し、その位置にキーを三次元空間に配置します。
-        </p>
-        <FingerArcDiagram />
-        <ImagePlaceholder caption="平面キーボードと3Dキーボードで指の動きがどう変わるかを表す図" />
-      </TechCard>
+    <div class="philosophy__grid">
+      {
+        designPhilosophyPrinciples.map((principle: DesignPrinciple, index: number) => (
+          <TechCard
+            data-aos="fade-up"
+            data-aos-delay={(index * 100).toString()}
+          >
+            <div class="philosophy__number">{String(index + 1).padStart(2, '0')}</div>
+            <h3 class="philosophy__title">{principle.title}</h3>
+            <p class="philosophy__desc">{principle.description}</p>
+          </TechCard>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .beginners__body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
+  .philosophy__intro {
+    max-width: 720px;
+    margin-bottom: var(--spacing-xl);
   }
 
-  .beginners__problem {
-    max-width: 800px;
+  .philosophy__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
   }
 
-  .beginners__heading {
-    font-family: var(--font-headline);
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    color: var(--color-text-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .beginners__issues {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    margin: var(--spacing-lg) 0;
-    padding: var(--spacing-lg);
-    background: var(--color-bg-tertiary);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  }
-
-  .beginners__issue {
-    display: flex;
-    gap: var(--spacing-sm);
-    align-items: flex-start;
-  }
-
-  .beginners__issue-marker {
-    color: var(--color-accent);
+  .philosophy__number {
     font-family: var(--font-mono);
-    flex-shrink: 0;
-    margin-top: 0.1em;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+    line-height: 1;
   }
 
-  .beginners__issue-text {
-    margin: 0;
-    color: var(--color-text-secondary);
-    font-size: 0.9375rem;
-    line-height: 1.6;
-  }
-
-  .beginners__solution {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-
-  .beginners__3d-card {
-    max-width: 800px;
-  }
-
-  strong {
+  .philosophy__title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
     color: var(--color-text-primary);
-    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .philosophy__desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .philosophy__grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .philosophy__number {
+      font-size: 1.75rem;
+    }
   }
 </style>
