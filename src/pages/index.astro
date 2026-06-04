@@ -1,16 +1,18 @@
 ---
-import Advanced from '@/components/sections/Advanced.astro';
-import Anatomy from '@/components/sections/Anatomy.astro';
-import Beginners from '@/components/sections/Beginners.astro';
-import Experience from '@/components/sections/Experience.astro';
-import Faq from '@/components/sections/Faq.astro';
-import Hero from '@/components/sections/Hero.astro';
-import History from '@/components/sections/History.astro';
-import TechSpecs from '@/components/sections/TechSpecs.astro';
-import Layout from '@/layouts/Layout.astro';
+import Advanced from "@/components/sections/Advanced.astro";
+import Anatomy from "@/components/sections/Anatomy.astro";
+import Beginners from "@/components/sections/Beginners.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Faq from "@/components/sections/Faq.astro";
+import Hero from "@/components/sections/Hero.astro";
+import History from "@/components/sections/History.astro";
+import TechSpecs from "@/components/sections/TechSpecs.astro";
+import Layout from "@/layouts/Layout.astro";
+import Analytics from "@vercel/analytics/astro";
 ---
 
 <Layout>
+  <Analytics />
   <Hero />
   <Experience />
   <Beginners />
