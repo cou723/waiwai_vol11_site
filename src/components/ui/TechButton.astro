@@ -1,0 +1,85 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { href, variant = 'primary', size = 'md' }: Props = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const variantClasses = {
+  primary: 'tech-button--primary',
+  secondary: 'tech-button--secondary',
+};
+
+const sizeClasses = {
+  sm: 'tech-button--sm',
+  md: 'tech-button--md',
+  lg: 'tech-button--lg',
+};
+
+const finalClass = ['tech-button', variantClasses[variant], sizeClasses[size]].join(' ');
+---
+
+<Tag class={finalClass} {...href ? { href } : { type: 'button' }}>
+  <slot />
+</Tag>
+
+<style>
+  .tech-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-headline);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: var(--radius-md);
+  }
+
+  .tech-button--primary {
+    color: white;
+    background: var(--color-accent);
+  }
+
+  .tech-button--primary:hover {
+    background: var(--color-accent-light);
+    transform: translateY(-2px);
+  }
+
+  .tech-button--secondary {
+    color: var(--color-accent);
+    background: transparent;
+    border: 1px solid var(--color-accent);
+  }
+
+  .tech-button--secondary:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .tech-button--sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .tech-button--md {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .tech-button--lg {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .tech-button:active {
+    transform: translateY(0);
+  }
+</style>

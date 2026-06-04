@@ -1,0 +1,381 @@
+---
+import TechButton from '@/components/ui/TechButton.astro';
+import { projectMeta } from '@/data/content';
+
+const badges = [
+  { label: 'v4', sub: '2026.06' },
+  { label: 'Rust + RMK', sub: 'Firmware' },
+  { label: '6DOF / key', sub: 'Placement' },
+  { label: 'Hand-measured', sub: 'Auto-gen' },
+  { label: 'PCB-less', sub: 'Wiring' },
+  { label: '3D Printed', sub: 'Housing' },
+];
+---
+
+<section id="hero" class="hero">
+  <!-- Radial spotlight glow -->
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <!-- Scan line animation -->
+  <div class="hero__scan" aria-hidden="true"></div>
+
+  <!-- Huge background watermark text -->
+  <div class="hero__watermark" aria-hidden="true">PAG3B</div>
+
+  <!-- HUD corner brackets -->
+  <div class="hero__hud" aria-hidden="true">
+    <span class="hud-corner hud-corner--tl"></span>
+    <span class="hud-corner hud-corner--tr"></span>
+    <span class="hud-corner hud-corner--bl"></span>
+    <span class="hud-corner hud-corner--br"></span>
+  </div>
+
+  <div class="container hero__container">
+    <div class="hero__layout">
+      <!-- Main content -->
+      <div class="hero__content">
+        <p class="hero__event">
+          <span class="hero__event-dot" aria-hidden="true"></span>
+          天下一キーボードわいわい会 vol.11
+        </p>
+        <p class="hero__fullname">{projectMeta.fullName}</p>
+        <h1 class="hero__title">{projectMeta.name}</h1>
+        <p class="hero__tagline">{projectMeta.tagline}</p>
+        <p class="hero__en">Measure your hand.<br />Generate your keyboard.</p>
+        <div class="hero__cta">
+          <TechButton href="#experience" variant="primary" size="lg">
+            この展示を体験する
+          </TechButton>
+          <TechButton href="#advanced" variant="secondary" size="lg">
+            技術仕様を見る
+          </TechButton>
+        </div>
+      </div>
+
+      <!-- Tech badges panel -->
+      <div class="hero__badges" aria-label="技術スペック一覧">
+        {badges.map((b, i) => (
+          <div
+            class="hero__badge"
+            style={`animation-delay: ${i * 120}ms`}
+          >
+            <span class="hero__badge-label">{b.label}</span>
+            <span class="hero__badge-sub">{b.sub}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="scroll-indicator"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+    overflow: hidden;
+  }
+
+  /* ===== Radial glow ===== */
+  .hero__glow {
+    position: absolute;
+    top: 35%;
+    left: 30%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== Scan line ===== */
+  .hero__scan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(59,130,246,0.6), transparent);
+    animation: scanDown 6s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes scanDown {
+    0%   { top: 0%; opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* ===== Watermark ===== */
+  .hero__watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-headline);
+    font-size: clamp(12rem, 30vw, 22rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(59,130,246,0.07);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    line-height: 1;
+  }
+
+  /* ===== HUD brackets ===== */
+  .hero__hud {
+    position: absolute;
+    inset: 16px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hud-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+  }
+
+  .hud-corner::before,
+  .hud-corner::after {
+    content: '';
+    position: absolute;
+    background: rgba(59,130,246,0.4);
+  }
+
+  .hud-corner::before { width: 100%; height: 2px; }
+  .hud-corner::after  { width: 2px; height: 100%; }
+
+  .hud-corner--tl { top: 0; left: 0; }
+  .hud-corner--tl::before { top: 0; left: 0; }
+  .hud-corner--tl::after  { top: 0; left: 0; }
+
+  .hud-corner--tr { top: 0; right: 0; }
+  .hud-corner--tr::before { top: 0; right: 0; }
+  .hud-corner--tr::after  { top: 0; right: 0; }
+
+  .hud-corner--bl { bottom: 0; left: 0; }
+  .hud-corner--bl::before { bottom: 0; left: 0; }
+  .hud-corner--bl::after  { bottom: 0; left: 0; }
+
+  .hud-corner--br { bottom: 0; right: 0; }
+  .hud-corner--br::before { bottom: 0; right: 0; }
+  .hud-corner--br::after  { bottom: 0; right: 0; }
+
+  /* ===== Layout ===== */
+  .hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .hero__layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  /* ===== Main content ===== */
+  .hero__content {
+    max-width: 680px;
+  }
+
+  .hero__event {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero__event-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: dotPulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(59,130,246,0.6); }
+    50%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(59,130,246,0); }
+  }
+
+  .hero__fullname {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    max-width: 560px;
+    border-left: 2px solid rgba(59,130,246,0.3);
+    padding-left: 0.75em;
+  }
+
+  .hero__title {
+    font-family: var(--font-headline);
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 900;
+    line-height: 0.9;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    text-shadow:
+      0 0 40px rgba(59,130,246,0.5),
+      0 0 80px rgba(59,130,246,0.2);
+  }
+
+  .hero__tagline {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.9;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-secondary);
+    max-width: 480px;
+  }
+
+  .hero__en {
+    font-family: var(--font-headline);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.55;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  /* ===== Tech badges ===== */
+  .hero__badges {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-self: center;
+  }
+
+  .hero__badge {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.875rem;
+    background: var(--color-badge-bg);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+    transition: border-color var(--transition-base), transform var(--transition-base);
+    animation: badgeFadeIn 0.5s ease both;
+    cursor: default;
+  }
+
+  .hero__badge:hover {
+    border-color: rgba(59,130,246,0.6);
+    transform: translateX(-4px);
+  }
+
+  @keyframes badgeFadeIn {
+    from { opacity: 0; transform: translateX(16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .hero__badge-label {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .hero__badge-sub {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+  }
+
+  /* ===== Scroll indicator ===== */
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-indicator {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    animation: scrollBounce 2s infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+    50%       { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .hero__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__badges {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .hero__badge:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: var(--spacing-xl);
+      padding-bottom: var(--spacing-xl);
+    }
+
+    .hero__title {
+      font-size: clamp(3rem, 18vw, 5rem);
+    }
+
+    .hero__cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero__badges {
+      display: none;
+    }
+  }
+</style>

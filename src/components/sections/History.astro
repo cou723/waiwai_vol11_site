@@ -1,0 +1,135 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import { historyItems } from '@/data/content';
+import type { HistoryItem } from '@/data/content';
+---
+
+<section id="history" class="section">
+  <div class="container">
+    <SectionTitle title="これまでの軌跡" subtitle="v1から現在のv4まで" />
+
+    <div class="history__timeline">
+      {
+        historyItems.map((item: HistoryItem, index: number) => (
+          <div
+            class={`history__item ${item.isCurrent ? 'history__item--current' : ''}`}
+            data-aos="fade-up"
+            data-aos-delay={(index * 80).toString()}
+          >
+            <div class="history__marker" aria-hidden="true">
+              <div class="history__dot"></div>
+              {index < historyItems.length - 1 && <div class="history__line"></div>}
+            </div>
+            <div class="history__content">
+              <div class="history__header">
+                <span class="history__version">{item.version}</span>
+                {item.isCurrent && (
+                  <span class="history__badge">本展示</span>
+                )}
+                <span class="history__period">{item.period}</span>
+              </div>
+              <p class="history__summary">{item.summary}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .history__timeline {
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
+  }
+
+  .history__item {
+    display: flex;
+    gap: var(--spacing-lg);
+  }
+
+  .history__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .history__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-bg-tertiary);
+    border: 2px solid var(--color-border-subtle);
+    flex-shrink: 0;
+    transition: border-color var(--transition-base);
+    margin-top: 0.25rem;
+  }
+
+  .history__item--current .history__dot {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+  }
+
+  .history__line {
+    width: 2px;
+    flex: 1;
+    background: var(--color-border-subtle);
+    min-height: var(--spacing-xl);
+    margin-top: 4px;
+  }
+
+  .history__content {
+    padding-bottom: var(--spacing-xl);
+    flex: 1;
+  }
+
+  .history__item:last-child .history__content {
+    padding-bottom: 0;
+  }
+
+  .history__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .history__version {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .history__badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white;
+    background: var(--color-accent);
+    padding: 0.2em 0.6em;
+    border-radius: var(--radius-sm);
+  }
+
+  .history__period {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .history__summary {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .history__item--current .history__summary {
+    color: var(--color-text-primary);
+  }
+</style>

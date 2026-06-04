@@ -1,0 +1,241 @@
+---
+import ZigzagSwitchDiagram from '@/components/diagrams/ZigzagSwitchDiagram.astro';
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import { techSpecs } from '@/data/content';
+import type { TechSpec } from '@/data/content';
+---
+
+<section id="tech-specs" class="section section--secondary">
+  <div class="container">
+    <SectionTitle
+      title="v4 技術仕様"
+      subtitle="本展示の世代。ジグザグ配置・PCBレス・初動作モデル完成。"
+    />
+
+    <div class="techspecs__grid">
+      {
+        techSpecs.map((spec: TechSpec, index: number) => (
+          <TechCard
+            class="techspecs__card"
+            data-aos="fade-up"
+            data-aos-delay={(index * 50).toString()}
+          >
+            <h3 class="techspecs__label">{spec.label}</h3>
+            <p class="techspecs__value">{spec.value}</p>
+            {spec.details && (
+              <ul class="techspecs__details">
+                {spec.details.map((detail: string) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+            )}
+          </TechCard>
+        ))
+      }
+    </div>
+
+    <div class="techspecs__zigzag-figure" data-aos="fade-up">
+      <ZigzagSwitchDiagram />
+      <ImagePlaceholder caption="スイッチがジグザグに上下配置され、キーキャップの足の長さで打鍵面を水平に揃えている断面を表す図" />
+    </div>
+
+    <div class="techspecs__flow" data-aos="fade-up">
+      <h3 class="techspecs__flow-title">生成フロー</h3>
+      <div class="techspecs__flow-steps">
+        {[
+          { label: '手を撮影', sublabel: 'pag3b-hand-measure' },
+          { label: 'キー配置計算', sublabel: 'pag3b_configurator' },
+          { label: '3Dモデル生成', sublabel: 'STL出力 via Onshape API' },
+          { label: '3Dプリント', sublabel: '筐体・キーキャップ' },
+          { label: '配線・完成', sublabel: 'より線+スイッチ+ダイオード' },
+        ].map((step, i, arr) => (
+          <div class="flow-item">
+            <div class="flow-item__box">
+              <span class="flow-item__label">{step.label}</span>
+              <span class="flow-item__sublabel">{step.sublabel}</span>
+            </div>
+            {i < arr.length - 1 && (
+              <span class="flow-item__arrow" aria-hidden="true">→</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="techspecs__coord" data-aos="fade-up">
+      <h3 class="techspecs__flow-title">キー配置の座標系</h3>
+      <TechCard>
+        <ul class="techspecs__coord-list">
+          <li><span class="techspecs__coord-key">原点</span>中指中手骨の近位端</li>
+          <li><span class="techspecs__coord-key">自由度</span>各キーは x / y / z / yaw / roll / pitch の6自由度で配置</li>
+          <li><span class="techspecs__coord-key">x・roll</span>同一行で共通値</li>
+          <li><span class="techspecs__coord-key">pitch</span>MP関節の円運動の法線から算出</li>
+        </ul>
+      </TechCard>
+    </div>
+  </div>
+</section>
+
+<style>
+  .techspecs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .techspecs__label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .techspecs__value {
+    font-size: 0.9375rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-mono);
+  }
+
+  .techspecs__details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .techspecs__details li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .techspecs__details li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+  }
+
+  .techspecs__details li:last-child {
+    margin-bottom: 0;
+  }
+
+  .techspecs__flow-title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .techspecs__zigzag-figure {
+    margin-bottom: var(--spacing-xl);
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+  }
+
+  .techspecs__flow {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .techspecs__flow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .flow-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .flow-item__box {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-base);
+  }
+
+  .flow-item__box:hover {
+    border-color: var(--color-accent);
+  }
+
+  .flow-item__label {
+    font-family: var(--font-headline);
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  .flow-item__sublabel {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .flow-item__arrow {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .techspecs__coord-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .techspecs__coord-list li {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: baseline;
+  }
+
+  .techspecs__coord-key {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.2em 0.5em;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .techspecs__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .techspecs__flow-steps {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .flow-item__arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>

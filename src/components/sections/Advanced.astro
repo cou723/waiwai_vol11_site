@@ -1,0 +1,203 @@
+---
+import WristAngleDiagram from '@/components/diagrams/WristAngleDiagram.astro';
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import { comparisonRows } from '@/data/content';
+import type { ComparisonRow } from '@/data/content';
+---
+
+<section id="advanced" class="section">
+  <div class="container">
+    <SectionTitle
+      title="自作キーボード勢の方へ"
+      subtitle="既存のエルゴノミクス系キーボードとの位置づけを整理します。"
+    />
+
+    <div data-aos="fade-up">
+      <h3 class="advanced__subheading">既存の選択肢との比較</h3>
+      <div class="advanced__table-wrapper">
+        <table class="advanced__table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>平面 Row stagger</th>
+              <th>平面 Column stagger</th>
+              <th>Dactyl / Kinesis等</th>
+              <th class="advanced__th--highlight">PAG3B</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              comparisonRows.map((row: ComparisonRow) => (
+                <tr>
+                  <td class="advanced__td--feature">{row.feature}</td>
+                  <td class="advanced__td--center">{row.rowStagger}</td>
+                  <td class="advanced__td--center">{row.columnStagger}</td>
+                  <td class="advanced__td--center">{row.dactyl}</td>
+                  <td class="advanced__td--center advanced__td--highlight">{row.pag3b}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <TechCard class="advanced__diff-card" data-aos="fade-up" data-aos-delay="100">
+      <p class="advanced__diff-label">PAG3Bが既存のエルゴノミクスキーボードと根本的に異なる点</p>
+      <p>
+        DactylやKinesisは「より良い平均」を目指しています。PAG3Bは「平均」という概念自体を捨て、個人の計測値から一意にキーボードを決定します。パラメータを手動でいじる必要はなく、測定すれば答えが出ます。
+      </p>
+    </TechCard>
+
+    <div class="advanced__anatomy" data-aos="fade-up">
+      <SectionTitle title="解剖学的設計の核心" align="left" />
+
+      <div class="advanced__anatomy-grid">
+        <TechCard>
+          <p class="advanced__anatomy-label">キー配置の原則</p>
+          <p class="advanced__anatomy-code">
+            PIP関節（近位指節間関節）の円運動の法線方向にキーを配置する。
+          </p>
+          <p>
+            キーを「押す」動作はMP関節の屈曲で実現し、PIP・DIP関節でキーの選択を行います。この原則に従うと、各キーの向き（pitch方向）はMP関節の円運動が描く法線ベクトルと一致させるのが最も効率的です。
+          </p>
+        </TechCard>
+
+        <TechCard>
+          <p class="advanced__anatomy-label">腱鞘炎防止</p>
+          <p>
+            手根関節を伸展した状態（手首を反らせた状態）でMP・PIP・DIP関節を繰り返し動かすと腱鞘炎の原因になります。PAG3Bは手根関節が自然な軽屈曲状態（0°〜10°程度の掌屈）でキーを操作できる<strong>後傾角（Backward-tilting）</strong>を採用します。
+          </p>
+          <WristAngleDiagram />
+          <ImagePlaceholder caption="手根関節が伸展した状態と軽屈曲状態の比較、およびPAG3Bの後傾角を表す図" />
+        </TechCard>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .advanced__subheading {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .advanced__table-wrapper {
+    overflow-x: auto;
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+  }
+
+  .advanced__table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .advanced__table th,
+  .advanced__table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .advanced__table th {
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    white-space: nowrap;
+  }
+
+  .advanced__th--highlight {
+    color: var(--color-accent) !important;
+  }
+
+  .advanced__td--feature {
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    min-width: 220px;
+  }
+
+  .advanced__td--center {
+    text-align: center;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .advanced__td--highlight {
+    color: var(--color-accent);
+    font-weight: 600;
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  .advanced__table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .advanced__table tr:hover td {
+    background: var(--color-border-subtle);
+  }
+
+  .advanced__diff-card {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .advanced__diff-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .advanced__anatomy {
+    margin-top: var(--spacing-xl);
+  }
+
+  .advanced__anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .advanced__anatomy-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .advanced__anatomy-code {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    background: var(--color-bg-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+  }
+
+  strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .advanced__anatomy-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

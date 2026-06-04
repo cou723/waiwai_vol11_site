@@ -1,0 +1,262 @@
+---
+// スイッチがジグザグに上下配置され、キーキャップの足の長さで打鍵面を水平に揃えている断面を表す図
+---
+
+<figure class="diagram">
+  <svg
+    viewBox="0 0 700 240"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="スイッチがジグザグに上下配置され、キーキャップの足の長さで打鍵面を水平に揃えている断面を表す図"
+    class="diagram__svg"
+  >
+    <!-- Title -->
+    <text x="350" y="22" text-anchor="middle" class="d-title">ジグザグ配置（断面図）</text>
+
+    <!--打鍵面 (flat top surface) -->
+    <line x1="80" y1="65" x2="620" y2="65" class="d-surface"/>
+    <text x="640" y="69" class="d-label-side">打鍵面</text>
+
+    <!-- Switch row data: [x_center, is_high, row_label] -->
+    <!-- High row y_switch=130, Low row y_switch=148 (9mm diff ~≈ 9px) -->
+    <!-- Keycap top always at y=65 -->
+
+    <!-- === Switch 1: ODD (low position, y_switch=155) === -->
+    <!-- Keycap -->
+    <rect x="105" y="65" width="52" height="16" rx="3" class="d-keycap d-keycap--odd"/>
+    <!-- Keycap stem (short) -->
+    <rect x="127" y="81" width="8" height="14" rx="1" class="d-stem d-stem--odd"/>
+    <!-- Switch body -->
+    <rect x="112" y="140" width="38" height="28" rx="3" class="d-switch d-switch--odd"/>
+    <!-- Switch pin -->
+    <line x1="125" y1="168" x2="125" y2="178" class="d-pin"/>
+    <line x1="143" y1="168" x2="143" y2="178" class="d-pin"/>
+    <!-- Row label -->
+    <text x="131" y="158" text-anchor="middle" class="d-row-num">1</text>
+    <!-- Odd label -->
+    <text x="131" y="195" text-anchor="middle" class="d-row-label d-row-label--odd">奇数行</text>
+
+    <!-- === Switch 2: EVEN (high position, y_switch=121) === -->
+    <rect x="193" y="65" width="52" height="16" rx="3" class="d-keycap d-keycap--even"/>
+    <!-- Keycap stem (long) -->
+    <rect x="215" y="81" width="8" height="33" rx="1" class="d-stem d-stem--even"/>
+    <!-- Switch body -->
+    <rect x="200" y="121" width="38" height="28" rx="3" class="d-switch d-switch--even"/>
+    <line x1="213" y1="149" x2="213" y2="159" class="d-pin"/>
+    <line x1="231" y1="149" x2="231" y2="159" class="d-pin"/>
+    <text x="219" y="139" text-anchor="middle" class="d-row-num">2</text>
+    <text x="219" y="172" text-anchor="middle" class="d-row-label d-row-label--even">偶数行</text>
+
+    <!-- === Switch 3: ODD === -->
+    <rect x="281" y="65" width="52" height="16" rx="3" class="d-keycap d-keycap--odd"/>
+    <rect x="303" y="81" width="8" height="14" rx="1" class="d-stem d-stem--odd"/>
+    <rect x="288" y="140" width="38" height="28" rx="3" class="d-switch d-switch--odd"/>
+    <line x1="301" y1="168" x2="301" y2="178" class="d-pin"/>
+    <line x1="319" y1="168" x2="319" y2="178" class="d-pin"/>
+    <text x="307" y="158" text-anchor="middle" class="d-row-num">3</text>
+    <text x="307" y="195" text-anchor="middle" class="d-row-label d-row-label--odd">奇数行</text>
+
+    <!-- === Switch 4: EVEN === -->
+    <rect x="369" y="65" width="52" height="16" rx="3" class="d-keycap d-keycap--even"/>
+    <rect x="391" y="81" width="8" height="33" rx="1" class="d-stem d-stem--even"/>
+    <rect x="376" y="121" width="38" height="28" rx="3" class="d-switch d-switch--even"/>
+    <line x1="389" y1="149" x2="389" y2="159" class="d-pin"/>
+    <line x1="407" y1="149" x2="407" y2="159" class="d-pin"/>
+    <text x="395" y="139" text-anchor="middle" class="d-row-num">4</text>
+    <text x="395" y="172" text-anchor="middle" class="d-row-label d-row-label--even">偶数行</text>
+
+    <!-- === Switch 5: ODD === -->
+    <rect x="457" y="65" width="52" height="16" rx="3" class="d-keycap d-keycap--odd"/>
+    <rect x="479" y="81" width="8" height="14" rx="1" class="d-stem d-stem--odd"/>
+    <rect x="464" y="140" width="38" height="28" rx="3" class="d-switch d-switch--odd"/>
+    <line x1="477" y1="168" x2="477" y2="178" class="d-pin"/>
+    <line x1="495" y1="168" x2="495" y2="178" class="d-pin"/>
+    <text x="483" y="158" text-anchor="middle" class="d-row-num">5</text>
+    <text x="483" y="195" text-anchor="middle" class="d-row-label d-row-label--odd">奇数行</text>
+
+    <!-- === Switch 6: EVEN === -->
+    <rect x="545" y="65" width="52" height="16" rx="3" class="d-keycap d-keycap--even"/>
+    <rect x="567" y="81" width="8" height="33" rx="1" class="d-stem d-stem--even"/>
+    <rect x="552" y="121" width="38" height="28" rx="3" class="d-switch d-switch--even"/>
+    <line x1="565" y1="149" x2="565" y2="159" class="d-pin"/>
+    <line x1="583" y1="149" x2="583" y2="159" class="d-pin"/>
+    <text x="571" y="139" text-anchor="middle" class="d-row-num">6</text>
+    <text x="571" y="172" text-anchor="middle" class="d-row-label d-row-label--even">偶数行</text>
+
+    <!-- Mounting plate / housing -->
+    <rect x="80" y="178" width="540" height="12" rx="2" class="d-plate"/>
+
+    <!-- Dimension annotation: stem length difference -->
+    <!-- Arrow for short stem -->
+    <line x1="92" y1="81" x2="92" y2="95" class="d-dim-line"/>
+    <text x="52" y="92" class="d-dim-text">短い足</text>
+
+    <!-- Arrow for long stem -->
+    <line x1="640" y1="81" x2="640" y2="114" class="d-dim-line"/>
+    <text x="648" y="102" class="d-dim-text">長い足</text>
+
+    <!-- 9mm gap annotation -->
+    <line x1="65" y1="121" x2="65" y2="140" class="d-gap-line"/>
+    <line x1="60" y1="121" x2="70" y2="121" class="d-gap-tick"/>
+    <line x1="60" y1="140" x2="70" y2="140" class="d-gap-tick"/>
+    <text x="30" y="132" class="d-gap-text">9mm</text>
+  </svg>
+
+  <figcaption class="diagram__caption">
+    奇数行（低い）と偶数行（高い）のスイッチを交互に配置し、キーキャップの足の長さで高さを補正することで打鍵面を水平に揃える。縦ピッチを圧縮しつつ隣のキーとのクリアランスを確保する。
+  </figcaption>
+</figure>
+
+<style>
+  .diagram {
+    margin: var(--spacing-lg) 0;
+  }
+
+  .diagram__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .diagram__caption {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-top: var(--spacing-sm);
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .d-title {
+    font-family: var(--font-headline, sans-serif);
+    font-size: 14px;
+    fill: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .d-surface {
+    stroke: rgba(229,229,229,0.5);
+    stroke-width: 2;
+    stroke-dasharray: 4,4;
+  }
+
+  .d-label-side {
+    font-family: monospace;
+    font-size: 10px;
+    fill: var(--color-text-secondary);
+  }
+
+  .d-keycap {
+    stroke-width: 1;
+  }
+
+  .d-keycap--odd {
+    fill: var(--color-bg-tertiary);
+    stroke: rgba(239,68,68,0.5);
+  }
+
+  .d-keycap--even {
+    fill: rgba(59,130,246,0.1);
+    stroke: rgba(59,130,246,0.6);
+  }
+
+  .d-stem {
+    stroke-width: 1;
+  }
+
+  .d-stem--odd {
+    fill: rgba(239,68,68,0.2);
+    stroke: rgba(239,68,68,0.4);
+  }
+
+  .d-stem--even {
+    fill: rgba(59,130,246,0.2);
+    stroke: rgba(59,130,246,0.4);
+  }
+
+  .d-switch {
+    stroke-width: 1;
+  }
+
+  .d-switch--odd {
+    fill: var(--color-bg-secondary);
+    stroke: rgba(239,68,68,0.35);
+  }
+
+  .d-switch--even {
+    fill: var(--color-bg-secondary);
+    stroke: rgba(59,130,246,0.45);
+  }
+
+  .d-pin {
+    stroke: rgba(229,229,229,0.25);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  .d-plate {
+    fill: var(--color-bg-tertiary);
+    stroke: rgba(229,229,229,0.2);
+    stroke-width: 1;
+  }
+
+  .d-row-num {
+    font-family: monospace;
+    font-size: 11px;
+    fill: var(--color-text-secondary);
+    font-weight: 600;
+  }
+
+  .d-row-label {
+    font-family: monospace;
+    font-size: 9px;
+  }
+
+  .d-row-label--odd {
+    fill: #ef4444;
+    opacity: 0.8;
+  }
+
+  .d-row-label--even {
+    fill: #3b82f6;
+    opacity: 0.9;
+  }
+
+  .d-dim-line {
+    stroke: rgba(229,229,229,0.3);
+    stroke-width: 1;
+    stroke-dasharray: 2,2;
+  }
+
+  .d-dim-text {
+    font-family: monospace;
+    font-size: 9px;
+    fill: var(--color-text-secondary);
+  }
+
+  .d-gap-line {
+    stroke: rgba(229,229,229,0.4);
+    stroke-width: 1;
+  }
+
+  .d-gap-tick {
+    stroke: rgba(229,229,229,0.4);
+    stroke-width: 1;
+  }
+
+  .d-gap-text {
+    font-family: monospace;
+    font-size: 9px;
+    fill: var(--color-text-secondary);
+    font-weight: 600;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .d-surface { stroke: rgba(0,0,0,0.4); }
+    .d-pin { stroke: rgba(0,0,0,0.25); }
+    .d-plate { stroke: rgba(0,0,0,0.2); }
+    .d-dim-line { stroke: rgba(0,0,0,0.3); }
+    .d-gap-line, .d-gap-tick { stroke: rgba(0,0,0,0.4); }
+  }
+</style>

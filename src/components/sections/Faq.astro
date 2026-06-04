@@ -1,0 +1,161 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import { faqItems } from '@/data/content';
+import type { FaqItem } from '@/data/content';
+---
+
+<section id="faq" class="section section--secondary">
+  <div class="container container-narrow">
+    <SectionTitle title="よくある質問" align="center" />
+
+    <div class="faq__list">
+      {
+        faqItems.map((item: FaqItem, index: number) => (
+          <details
+            class="faq__item"
+            data-aos="fade-up"
+            data-aos-delay={(index * 80).toString()}
+          >
+            <summary class="faq__question">
+              <span class="faq__q-mark">Q</span>
+              <span class="faq__q-text">{item.question}</span>
+              <span class="faq__chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-mark">A</span>
+              <p class="faq__a-text">{item.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .faq__item {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+  }
+
+  .faq__item:hover,
+  .faq__item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__q-mark {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.2em 0.5em;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    line-height: 1.6;
+  }
+
+  .faq__q-text {
+    flex: 1;
+    font-family: var(--font-japanese);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+  }
+
+  .faq__chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 0.3em;
+    transition: transform var(--transition-fast);
+  }
+
+  .faq__chevron::before,
+  .faq__chevron::after {
+    content: '';
+    position: absolute;
+    background: var(--color-text-secondary);
+    border-radius: 2px;
+    transition: transform var(--transition-fast);
+  }
+
+  .faq__chevron::before {
+    width: 8px;
+    height: 2px;
+    top: 7px;
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: right center;
+  }
+
+  .faq__chevron::after {
+    width: 8px;
+    height: 2px;
+    top: 7px;
+    right: 0;
+    transform: rotate(-45deg);
+    transform-origin: left center;
+  }
+
+  .faq__item[open] .faq__chevron::before {
+    transform: rotate(-45deg);
+  }
+
+  .faq__item[open] .faq__chevron::after {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--spacing-md);
+  }
+
+  .faq__a-mark {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-tertiary);
+    padding: 0.2em 0.5em;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    line-height: 1.6;
+  }
+
+  .faq__a-text {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin: 0;
+  }
+</style>

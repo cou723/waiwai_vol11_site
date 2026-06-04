@@ -1,0 +1,74 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import { experienceItems } from '@/data/content';
+import type { ExperienceItem } from '@/data/content';
+---
+
+<section id="experience" class="section">
+  <div class="container">
+    <SectionTitle
+      title="展示でできること"
+      subtitle="今日の展示では、以下の体験ができます。"
+      id="experience-title"
+    />
+
+    <div class="experience__grid">
+      {
+        experienceItems.map((item: ExperienceItem, index: number) => (
+          <TechCard
+            class="experience__card"
+            data-aos="fade-up"
+            data-aos-delay={(index * 100).toString()}
+          >
+            <div class="experience__step">{String(item.step).padStart(2, '0')}</div>
+            <h3 class="experience__title">{item.title}</h3>
+            <p class="experience__description">{item.description}</p>
+          </TechCard>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .experience__step {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+    line-height: 1;
+  }
+
+  .experience__title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .experience__description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .experience__grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .experience__step {
+      font-size: 1.75rem;
+    }
+  }
+</style>

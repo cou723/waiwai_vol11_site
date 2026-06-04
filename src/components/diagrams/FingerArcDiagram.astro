@@ -1,0 +1,219 @@
+---
+// 平面キーボードと3Dキーボードで指の動きがどう変わるかを表す図
+---
+
+<figure class="diagram">
+  <svg
+    viewBox="0 0 700 280"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="平面キーボードと3Dキーボードで指の動きがどう変わるかを表す図"
+    class="diagram__svg"
+  >
+    <!-- ===== Left: Flat keyboard ===== -->
+    <!-- Label -->
+    <text x="175" y="28" text-anchor="middle" class="d-label-main">平面キーボード</text>
+    <text x="175" y="46" text-anchor="middle" class="d-label-sub">Row / Column Stagger</text>
+
+    <!-- Keys: all at same height y=220 -->
+    <g class="d-keys-flat">
+      <rect x="55"  y="215" width="36" height="20" rx="4" class="d-key"/>
+      <rect x="97"  y="215" width="36" height="20" rx="4" class="d-key"/>
+      <rect x="139" y="215" width="36" height="20" rx="4" class="d-key"/>
+      <rect x="181" y="215" width="36" height="20" rx="4" class="d-key"/>
+      <rect x="223" y="215" width="36" height="20" rx="4" class="d-key"/>
+    </g>
+
+    <!-- Finger base line -->
+    <line x1="115" y1="100" x2="115" y2="100" class="d-knuckle-line"/>
+    <!-- Fingers: straight vertical lines (unnatural reach) -->
+    <!-- Index finger -->
+    <line x1="90"  y1="100" x2="73"  y2="215" class="d-finger d-finger--bad"/>
+    <!-- Middle finger -->
+    <line x1="120" y1="90"  x2="115" y2="215" class="d-finger d-finger--bad"/>
+    <!-- Ring finger -->
+    <line x1="150" y1="96"  x2="157" y2="215" class="d-finger d-finger--bad"/>
+    <!-- Pinky -->
+    <line x1="178" y1="106" x2="199" y2="215" class="d-finger d-finger--bad"/>
+    <!-- Thumb approximation -->
+    <line x1="82"  y1="120" x2="241" y2="225" class="d-finger d-finger--bad" stroke-dasharray="4,3"/>
+
+    <!-- Palm -->
+    <ellipse cx="140" cy="105" rx="55" ry="22" class="d-palm"/>
+
+    <!-- Wrist extended indicator -->
+    <path d="M 110 127 Q 110 155 100 175" class="d-wrist-bad" fill="none"/>
+    <text x="62" y="188" class="d-warn">手首↑伸展</text>
+
+    <!-- Divider -->
+    <line x1="350" y1="20" x2="350" y2="270" class="d-divider"/>
+
+    <!-- ===== Right: 3D keyboard ===== -->
+    <text x="525" y="28" text-anchor="middle" class="d-label-main d-label-accent">3D キーボード (PAG3B)</text>
+    <text x="525" y="46" text-anchor="middle" class="d-label-sub">指の弧に合わせた配置</text>
+
+    <!-- Keys at different heights following arc -->
+    <!-- Each key is positioned along a curve -->
+    <g class="d-keys-3d">
+      <rect x="410" y="228" width="36" height="20" rx="4" class="d-key d-key--accent"/>
+      <rect x="452" y="215" width="36" height="20" rx="4" class="d-key d-key--accent"/>
+      <rect x="494" y="208" width="36" height="20" rx="4" class="d-key d-key--accent"/>
+      <rect x="536" y="213" width="36" height="20" rx="4" class="d-key d-key--accent"/>
+      <rect x="578" y="224" width="36" height="20" rx="4" class="d-key d-key--accent"/>
+    </g>
+
+    <!-- Arc path showing natural finger reach -->
+    <path d="M 428 228 Q 480 200 614 224" class="d-arc" fill="none"/>
+
+    <!-- Fingers following natural arcs -->
+    <path d="M 445 100 Q 440 160 428 228" class="d-finger d-finger--good" fill="none"/>
+    <path d="M 475 90  Q 472 150 470 215" class="d-finger d-finger--good" fill="none"/>
+    <path d="M 505 96  Q 505 152 512 208" class="d-finger d-finger--good" fill="none"/>
+    <path d="M 533 103 Q 537 158 554 213" class="d-finger d-finger--good" fill="none"/>
+    <path d="M 435 120 Q 580 210 596 224" class="d-finger d-finger--good" fill="none" stroke-dasharray="4,3"/>
+
+    <!-- Palm 3D side -->
+    <ellipse cx="490" cy="105" rx="55" ry="22" class="d-palm"/>
+
+    <!-- Wrist natural indicator -->
+    <path d="M 460 127 Q 455 155 448 172" class="d-wrist-good" fill="none"/>
+    <text x="398" y="187" class="d-ok">手首→自然</text>
+
+    <!-- Arc radius annotation -->
+    <path d="M 475 90 L 475 200" class="d-anno" fill="none" stroke-dasharray="3,3"/>
+    <path d="M 475 200 L 470 215" class="d-anno" fill="none"/>
+    <text x="432" y="155" class="d-anno-text">PIP関節</text>
+    <text x="432" y="168" class="d-anno-text">の円弧</text>
+  </svg>
+
+  <figcaption class="diagram__caption">
+    平面キーボードでは指を斜めに伸ばして各キーへ届かせるが、PAG3Bでは指の関節が描く弧の上にキーが並ぶため、自然な屈伸だけで押せる。
+  </figcaption>
+</figure>
+
+<style>
+  .diagram {
+    margin: var(--spacing-lg) 0;
+  }
+
+  .diagram__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .diagram__caption {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-top: var(--spacing-sm);
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  /* SVG element styles via CSS custom props passed through fill/stroke */
+  .d-label-main {
+    font-family: var(--font-headline, sans-serif);
+    font-size: 15px;
+    fill: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .d-label-accent {
+    fill: #3b82f6;
+  }
+
+  .d-label-sub {
+    font-family: monospace;
+    font-size: 10px;
+    fill: var(--color-text-secondary);
+  }
+
+  .d-key {
+    fill: var(--color-bg-tertiary);
+    stroke: rgba(229,229,229,0.15);
+    stroke-width: 1;
+  }
+
+  .d-key--accent {
+    fill: rgba(59,130,246,0.1);
+    stroke: rgba(59,130,246,0.4);
+  }
+
+  .d-finger {
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+
+  .d-finger--bad {
+    stroke: #ef4444;
+    opacity: 0.7;
+  }
+
+  .d-finger--good {
+    stroke: #3b82f6;
+    opacity: 0.85;
+  }
+
+  .d-palm {
+    fill: var(--color-bg-tertiary);
+    stroke: rgba(229,229,229,0.3);
+    stroke-width: 1.5;
+  }
+
+  .d-arc {
+    stroke: rgba(59,130,246,0.4);
+    stroke-width: 1.5;
+    stroke-dasharray: 5,3;
+  }
+
+  .d-divider {
+    stroke: rgba(229,229,229,0.1);
+    stroke-width: 1;
+  }
+
+  .d-wrist-bad {
+    stroke: #ef4444;
+    stroke-width: 2;
+    opacity: 0.6;
+  }
+
+  .d-wrist-good {
+    stroke: #22c55e;
+    stroke-width: 2;
+    opacity: 0.6;
+  }
+
+  .d-warn {
+    font-family: monospace;
+    font-size: 10px;
+    fill: #ef4444;
+    opacity: 0.9;
+  }
+
+  .d-ok {
+    font-family: monospace;
+    font-size: 10px;
+    fill: #22c55e;
+    opacity: 0.9;
+  }
+
+  .d-anno {
+    stroke: rgba(229,229,229,0.2);
+    stroke-width: 1;
+  }
+
+  .d-anno-text {
+    font-family: monospace;
+    font-size: 9px;
+    fill: var(--color-text-secondary);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .d-key { stroke: rgba(0,0,0,0.15); }
+    .d-palm { stroke: rgba(0,0,0,0.3); }
+    .d-divider { stroke: rgba(0,0,0,0.1); }
+    .d-anno { stroke: rgba(0,0,0,0.2); }
+  }
+</style>

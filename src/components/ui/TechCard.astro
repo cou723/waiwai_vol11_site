@@ -1,0 +1,40 @@
+---
+interface Props {
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { class: className = '', ...rest } = Astro.props;
+---
+
+<div class={`tech-card ${className}`} {...rest}>
+  <div class="tech-card__inner">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .tech-card {
+    position: relative;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-base);
+  }
+
+  .tech-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .tech-card__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tech-card__inner p,
+  .tech-card__inner li {
+    color: var(--color-text-primary);
+  }
+</style>

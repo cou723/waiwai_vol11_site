@@ -1,0 +1,120 @@
+---
+import FingerArcDiagram from '@/components/diagrams/FingerArcDiagram.astro';
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+---
+
+<section id="beginners" class="section section--secondary">
+  <div class="container">
+    <SectionTitle
+      title="キーボードを始めたばかりの方へ"
+      subtitle="市販のキーボードが抱える問題と、PAG3Bのアプローチ"
+    />
+
+    <div class="beginners__body">
+      <div class="beginners__problem" data-aos="fade-up">
+        <h3 class="beginners__heading">今のキーボード、あなたの手に合っていますか？</h3>
+        <p>
+          市販のキーボードは、ほぼすべて<strong>欧米成人男性の手のサイズ</strong>を基準に設計されています。これはタイプライターが発明された19世紀から変わっていない事実です。
+        </p>
+        <p>
+          さらに、タイプライターの時代には機械的な制約から「横にズレた配列（Row stagger）」や「巨大なスペースバー」が生まれました。この設計は100年以上経った今も、ほぼそのまま引き継がれています。
+        </p>
+
+        <div class="beginners__issues">
+          {[
+            '手の小さい人（日本人女性、子供など）は数字行に指が届かない',
+            'ホームポジションから遠いキーに無理に手を伸ばすことで、長時間使用での腱鞘炎リスクが上がる',
+            'タッチタイピングの習得が実際よりずっと難しくなっている',
+          ].map((issue) => (
+            <div class="beginners__issue">
+              <span class="beginners__issue-marker" aria-hidden="true">→</span>
+              <p class="beginners__issue-text">{issue}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="beginners__solution">
+          PAG3Bはこの問題を根本から解決します。あなたの手を測定し、あなたの手の形・指の長さに合った3Dキーボードを<strong>自動生成</strong>します。
+        </p>
+      </div>
+
+      <TechCard class="beginners__3d-card" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="beginners__heading">「立体」キーボードって何が違うの？</h3>
+        <p>
+          普通のキーボードはすべてのキーが一枚の平面に並んでいます。でも指は平面ではなく、関節の動きに沿って<strong>弧を描いて</strong>動きます。さらに、指を曲げる量によってホームポジションからキーまでの距離が変わるため、<strong>同じキー配置でも人によって「ちょうどいい位置」が違います</strong>。
+        </p>
+        <p>
+          PAG3Bでは、あなた自身の指の長さから「どの位置にキーがあると一番自然に押せるか」を計算し、その位置にキーを三次元空間に配置します。
+        </p>
+        <FingerArcDiagram />
+        <ImagePlaceholder caption="平面キーボードと3Dキーボードで指の動きがどう変わるかを表す図" />
+      </TechCard>
+    </div>
+  </div>
+</section>
+
+<style>
+  .beginners__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .beginners__problem {
+    max-width: 800px;
+  }
+
+  .beginners__heading {
+    font-family: var(--font-headline);
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .beginners__issues {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    background: var(--color-bg-tertiary);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .beginners__issue {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+  }
+
+  .beginners__issue-marker {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  .beginners__issue-text {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .beginners__solution {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .beginners__3d-card {
+    max-width: 800px;
+  }
+
+  strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+interface Props {
+  caption: string;
+  aspectRatio?: string;
+}
+
+const { caption, aspectRatio = '16/7' }: Props = Astro.props;
+---
+
+<figure class="img-placeholder" style={`aspect-ratio: ${aspectRatio}`}>
+  <div class="img-placeholder__inner">
+    <svg class="img-placeholder__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="M21 15l-5-5L5 21" />
+    </svg>
+    <p class="img-placeholder__caption">{caption}</p>
+  </div>
+</figure>
+
+<style>
+  .img-placeholder {
+    width: 100%;
+    background: var(--color-bg-tertiary);
+    border: 1px dashed var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .img-placeholder__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .img-placeholder__icon {
+    width: 40px;
+    height: 40px;
+    color: var(--color-border-subtle);
+  }
+
+  .img-placeholder__caption {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+    margin: 0;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+</style>

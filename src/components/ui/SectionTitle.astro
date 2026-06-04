@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  id?: string;
+}
+
+const { title, subtitle, align = 'left', id }: Props = Astro.props;
+
+const alignClass = align === 'center' ? 'section-title--center' : '';
+---
+
+<section id={id} class={`section-title ${alignClass}`}>
+  <h2 class="section-title__main">
+    <span class="section-title__accent"></span>
+    <span class="section-title__text">{title}</span>
+  </h2>
+  {subtitle && <p class="section-title__subtitle">{subtitle}</p>}
+</section>
+
+<style>
+  .section-title {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-title--center {
+    text-align: center;
+  }
+
+  .section-title__main {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    font-family: var(--font-headline);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section-title--center .section-title__main {
+    justify-content: center;
+  }
+
+  .section-title__accent {
+    width: 4px;
+    height: 1.5em;
+    background: var(--color-accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .section-title--center .section-title__accent {
+    display: none;
+  }
+
+  .section-title__text {
+    color: var(--color-text-primary);
+  }
+
+  .section-title__subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: calc(4px + var(--spacing-md));
+  }
+
+  .section-title--center .section-title__subtitle {
+    padding-left: 0;
+  }
+
+  @media (max-width: 768px) {
+    .section-title__main {
+      gap: var(--spacing-sm);
+    }
+  }
+</style>
