@@ -22,6 +22,7 @@ export interface HistoryItem {
   period: string;
   summary: string;
   isCurrent?: boolean;
+  image?: { src: string; alt: string };
 }
 
 export interface FaqItem {
@@ -212,6 +213,7 @@ export const historyItems: HistoryItem[] = [
     period: "2026年6月",
     summary: "ジグザグ配置・PCBレス・初動作モデル完成",
     isCurrent: true,
+    image: { src: "/v4-prototype.jpg", alt: "PAG3B v4プロトタイプ" },
   },
 ];
 

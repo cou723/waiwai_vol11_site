@@ -29,6 +29,13 @@ import type { HistoryItem } from '@/data/content';
                 <span class="history__period">{item.period}</span>
               </div>
               <p class="history__summary">{item.summary}</p>
+              {item.image && (
+                <img
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  class="history__image"
+                />
+              )}
             </div>
           </div>
         ))
@@ -88,6 +95,14 @@ import type { HistoryItem } from '@/data/content';
 
   .history__item:last-child .history__content {
     padding-bottom: 0;
+  }
+
+  .history__image {
+    margin-top: var(--spacing-md);
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--radius-md);
+    display: block;
   }
 
   .history__header {
