@@ -134,8 +134,8 @@ export const comparisonRows: ComparisonRow[] = [
 
 export const techSpecs: TechSpec[] = [
   {
-    label: "ファームウェア",
-    value: "Rust + RMK v0.8 / Raspberry Pi Pico (W)",
+    label: "コントローラー",
+    value: "Raspberry Pi Pico (W) + RMK v0.8（Vial対応）",
   },
   {
     label: "手計測アプリ",
