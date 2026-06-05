@@ -292,9 +292,12 @@ const canonicalURL = Astro.url.href;
     <div class="grid-background" aria-hidden="true"></div>
 
     <header class="nav" role="navigation">
-      <nav class="container">
+      <nav class="container nav__inner">
+        <a href="#hero" class="nav__logo" aria-label="PAG3B トップへ">
+          <img src="/favicon.svg" alt="PAG3B" width="26" height="26" class="nav__logo-icon" />
+          <span class="nav__logo-name">PAG3B</span>
+        </a>
         <ul class="nav__list">
-          <li><a href="#hero" class="nav__link">Top</a></li>
           <li><a href="#experience" class="nav__link">展示体験</a></li>
           <li><a href="#design-philosophy" class="nav__link">設計思想</a></li>
           <li><a href="#comparison" class="nav__link">比較</a></li>
@@ -368,6 +371,38 @@ const canonicalURL = Astro.url.href;
     border-bottom: 1px solid var(--color-border-subtle);
   }
 
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-shrink: 0;
+    color: var(--color-text-primary);
+    font-family: var(--font-headline);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+  }
+
+  .nav__logo:hover {
+    color: var(--color-accent);
+  }
+
+  .nav__logo-icon {
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.4));
+    transition: filter var(--transition-fast);
+  }
+
+  .nav__logo:hover .nav__logo-icon {
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7));
+  }
+
   .nav__list {
     display: flex;
     list-style: none;
@@ -375,6 +410,7 @@ const canonicalURL = Astro.url.href;
     padding: var(--spacing-md) 0;
     overflow-x: auto;
     scrollbar-width: none;
+    flex: 1;
   }
 
   .nav__list::-webkit-scrollbar {
@@ -439,6 +475,12 @@ const canonicalURL = Astro.url.href;
   }
 
   @media (max-width: 768px) {
+    .nav__inner {
+      gap: var(--spacing-md);
+    }
+    .nav__logo-name {
+      display: none;
+    }
     .nav__list {
       gap: var(--spacing-sm);
       padding: var(--spacing-sm) 0;

@@ -36,10 +36,23 @@ export interface TechSpec {
   reference?: { text: string; href: string };
 }
 
+export interface AcronymEntry {
+  letter: string;
+  english: string;
+  japanese: string;
+}
+
 export const projectMeta = {
   name: "PAG3B",
   fullName: "Personalized Automatic Generative 3D Backward-tilting Keyboard",
   tagline: "Trace down, tone up, touch in",
+  acronym: [
+    { letter: "P", english: "Personalized", japanese: "個人最適化" },
+    { letter: "A", english: "Automatic", japanese: "自動生成" },
+    { letter: "G", english: "Generative", japanese: "計測からモデルを生成" },
+    { letter: "3D", english: "3 Dimensional", japanese: "立体配置" },
+    { letter: "B", english: "Backward-tilting", japanese: "後傾角" },
+  ] as AcronymEntry[],
 };
 
 export const experienceItems: ExperienceItem[] = [
@@ -121,7 +134,7 @@ export const comparisonRows: ComparisonRow[] = [
 export const techSpecs: TechSpec[] = [
   {
     label: "ファームウェア",
-    value: "Rust + Embassy + RMK v0.8 / Raspberry Pi Pico (W)",
+    value: "Rust + RMK v0.8 / Raspberry Pi Pico (W)",
   },
   {
     label: "手計測アプリ",

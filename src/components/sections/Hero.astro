@@ -1,15 +1,7 @@
 ---
 import TechButton from '@/components/ui/TechButton.astro';
 import { projectMeta } from '@/data/content';
-
-const badges = [
-  { label: 'v4', sub: '2026.06' },
-  { label: 'Rust + RMK', sub: 'Firmware' },
-  { label: '6DOF / key', sub: 'Placement' },
-  { label: 'Hand-measured', sub: 'Auto-gen' },
-  { label: 'PCB-less', sub: 'Wiring' },
-  { label: '3D Printed', sub: 'Housing' },
-];
+import type { AcronymEntry } from '@/data/content';
 ---
 
 <section id="hero" class="hero">
@@ -22,6 +14,11 @@ const badges = [
   <!-- Huge background watermark text -->
   <div class="hero__watermark" aria-hidden="true">PAG3B</div>
 
+  <!-- Giant background icon -->
+  <div class="hero__bg-icon" aria-hidden="true">
+    <img src="/favicon.svg" alt="" />
+  </div>
+
   <!-- HUD corner brackets -->
   <div class="hero__hud" aria-hidden="true">
     <span class="hud-corner hud-corner--tl"></span>
@@ -32,13 +29,21 @@ const badges = [
 
   <div class="container hero__container">
     <div class="hero__layout">
-      <!-- Main content -->
       <div class="hero__content">
         <p class="hero__event">
           <span class="hero__event-dot" aria-hidden="true"></span>
           天下一キーボードわいわい会 vol.11
         </p>
-        <p class="hero__fullname">{projectMeta.fullName}</p>
+        <div class="hero__acronym" aria-label={projectMeta.fullName}>
+          {projectMeta.acronym.map((entry: AcronymEntry) => (
+            <div class="hero__acronym-row">
+              <span class="hero__acronym-letter">{entry.letter}</span>
+              <span class="hero__acronym-english">{entry.english}</span>
+              <span class="hero__acronym-sep" aria-hidden="true">／</span>
+              <span class="hero__acronym-japanese">{entry.japanese}</span>
+            </div>
+          ))}
+        </div>
         <h1 class="hero__title">{projectMeta.name}</h1>
         <p class="hero__tagline">{projectMeta.tagline}</p>
         <div class="hero__cta">
@@ -51,24 +56,15 @@ const badges = [
         </div>
       </div>
 
-      <!-- Tech badges panel -->
-      <div class="hero__badges" aria-label="技術スペック一覧">
-        {badges.map((b, i) => (
-          <div
-            class="hero__badge"
-            style={`animation-delay: ${i * 120}ms`}
-          >
-            <span class="hero__badge-label">{b.label}</span>
-            <span class="hero__badge-sub">{b.sub}</span>
-          </div>
-        ))}
+      <div class="hero__visual" aria-hidden="true">
+        <img src="/favicon.svg" alt="" class="hero__icon" />
       </div>
     </div>
+  </div>
 
-    <!-- Scroll indicator -->
-    <div class="hero__scroll" aria-hidden="true">
-      <span class="scroll-indicator"></span>
-    </div>
+  <!-- Scroll indicator -->
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="scroll-indicator"></span>
   </div>
 </section>
 
@@ -135,6 +131,37 @@ const badges = [
     line-height: 1;
   }
 
+  /* ===== Giant background icon ===== */
+  .hero__bg-icon {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    width: clamp(500px, 75vw, 900px);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    opacity: 0.045;
+    animation: bgIconDrift 20s ease-in-out infinite;
+  }
+
+  .hero__bg-icon img {
+    width: 100%;
+    height: auto;
+    filter: blur(1px);
+  }
+
+  @keyframes bgIconDrift {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50%       { transform: translate(-50%, -52%) scale(1.03); }
+  }
+
+  @media (max-width: 768px) {
+    .hero__bg-icon {
+      left: 50%;
+    }
+  }
+
   /* ===== HUD brackets ===== */
   .hero__hud {
     position: absolute;
@@ -184,9 +211,29 @@ const badges = [
 
   .hero__layout {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--spacing-2xl);
+    grid-template-columns: 1fr 1fr;
     align-items: center;
+    gap: var(--spacing-2xl);
+  }
+
+  .hero__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero__icon {
+    width: clamp(180px, 28vw, 380px);
+    height: auto;
+    filter:
+      drop-shadow(0 0 40px rgba(59, 130, 246, 0.5))
+      drop-shadow(0 0 80px rgba(59, 130, 246, 0.2));
+    animation: iconFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50%       { transform: translateY(-12px) rotate(1deg); }
   }
 
   /* ===== Main content ===== */
@@ -221,16 +268,42 @@ const badges = [
     50%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(59,130,246,0); }
   }
 
-  .hero__fullname {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-text-secondary);
-    letter-spacing: 0.03em;
-    line-height: 1.6;
+  .hero__acronym {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     margin-bottom: var(--spacing-md);
-    max-width: 560px;
     border-left: 2px solid rgba(59,130,246,0.3);
     padding-left: 0.75em;
+  }
+
+  .hero__acronym-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .hero__acronym-letter {
+    color: var(--color-accent);
+    font-weight: 700;
+    min-width: 2em;
+    flex-shrink: 0;
+  }
+
+  .hero__acronym-english {
+    color: var(--color-text-primary);
+  }
+
+  .hero__acronym-sep {
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+  }
+
+  .hero__acronym-japanese {
+    color: var(--color-text-secondary);
   }
 
   .hero__title {
@@ -265,54 +338,6 @@ const badges = [
     flex-wrap: wrap;
   }
 
-  /* ===== Tech badges ===== */
-  .hero__badges {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    align-self: center;
-  }
-
-  .hero__badge {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem 0.875rem;
-    background: var(--color-badge-bg);
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: var(--radius-md);
-    backdrop-filter: blur(8px);
-    transition: border-color var(--transition-base), transform var(--transition-base);
-    animation: badgeFadeIn 0.5s ease both;
-    cursor: default;
-  }
-
-  .hero__badge:hover {
-    border-color: rgba(59,130,246,0.6);
-    transform: translateX(-4px);
-  }
-
-  @keyframes badgeFadeIn {
-    from { opacity: 0; transform: translateX(16px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-
-  .hero__badge-label {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    color: var(--color-text-primary);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .hero__badge-sub {
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.8;
-  }
-
   /* ===== Scroll indicator ===== */
   .hero__scroll {
     position: absolute;
@@ -337,25 +362,22 @@ const badges = [
   }
 
   /* ===== Responsive ===== */
-  @media (max-width: 900px) {
-    .hero__layout {
-      grid-template-columns: 1fr;
-    }
-
-    .hero__badges {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .hero__badge:hover {
-      transform: translateY(-2px);
-    }
-  }
-
   @media (max-width: 768px) {
     .hero {
       padding-top: var(--spacing-xl);
       padding-bottom: var(--spacing-xl);
+    }
+
+    .hero__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__visual {
+      display: none;
+    }
+
+    .hero__scroll {
+      display: none;
     }
 
     .hero__title {
@@ -365,10 +387,6 @@ const badges = [
     .hero__cta {
       flex-direction: column;
       align-items: stretch;
-    }
-
-    .hero__badges {
-      display: none;
     }
   }
 </style>

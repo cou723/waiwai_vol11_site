@@ -51,7 +51,7 @@ import type { TechSpec } from '@/data/content';
     <div class="techspecs__stack" data-aos="fade-up">
       <h3 class="techspecs__section-title">スタック</h3>
       <TechCard>
-        <pre class="techspecs__stack-code"><code>ファームウェア  : Rust + Embassy + RMK v0.8 / Raspberry Pi Pico (W)
+        <pre class="techspecs__stack-code"><code>ファームウェア  : Rust + RMK v0.8 / Raspberry Pi Pico (W)
 手計測アプリ   : React 19 + TypeScript + MediaPipe Tasks Vision + OpenCV.js
 CAD生成       : Deno + TypeScript + Onshape CAD API</code></pre>
       </TechCard>
@@ -59,26 +59,39 @@ CAD生成       : Deno + TypeScript + Onshape CAD API</code></pre>
 
     <div class="techspecs__flow" data-aos="fade-up">
       <h3 class="techspecs__section-title">生成フロー</h3>
-      <div class="techspecs__flow-steps">
-        {
-          [
-            { label: '手を撮影', sublabel: 'pag3b-hand-measure' },
-            { label: 'キー配置計算', sublabel: 'pag3b_configurator' },
-            { label: '3Dモデル生成', sublabel: 'STL出力 via Onshape API' },
-            { label: '3Dプリント', sublabel: '筐体・キーキャップ' },
-            { label: '配線・完成', sublabel: 'より線+スイッチ+ダイオード' },
-          ].map((step, i, arr) => (
-            <div class="flow-item">
-              <div class="flow-item__box">
-                <span class="flow-item__label">{step.label}</span>
-                <span class="flow-item__sublabel">{step.sublabel}</span>
-              </div>
-              {i < arr.length - 1 && (
-                <span class="flow-item__arrow" aria-hidden="true">→</span>
-              )}
+      <div class="techspecs__flow-diagram">
+        <div class="flow-branch">
+          <div class="flow-item__box flow-item__box--primary">
+            <span class="flow-item__label">手を撮影</span>
+            <span class="flow-item__sublabel">pag3b-hand-measure</span>
+          </div>
+          <div class="flow-branch__alt">
+            <div class="flow-item__box flow-item__box--secondary">
+              <span class="flow-item__label">AIST人体寸法DB</span>
+              <span class="flow-item__sublabel">個人計測なし時</span>
             </div>
-          ))
-        }
+          </div>
+        </div>
+        <span class="flow-item__arrow" aria-hidden="true">→</span>
+        <div class="flow-item__box">
+          <span class="flow-item__label">キー配置計算</span>
+          <span class="flow-item__sublabel">pag3b_configurator</span>
+        </div>
+        <span class="flow-item__arrow" aria-hidden="true">→</span>
+        <div class="flow-item__box">
+          <span class="flow-item__label">3Dモデル生成</span>
+          <span class="flow-item__sublabel">STL出力 via Onshape API</span>
+        </div>
+        <span class="flow-item__arrow" aria-hidden="true">→</span>
+        <div class="flow-item__box">
+          <span class="flow-item__label">3Dプリント</span>
+          <span class="flow-item__sublabel">筐体・キーキャップ</span>
+        </div>
+        <span class="flow-item__arrow" aria-hidden="true">→</span>
+        <div class="flow-item__box">
+          <span class="flow-item__label">配線・完成</span>
+          <span class="flow-item__sublabel">より線+スイッチ+ダイオード</span>
+        </div>
       </div>
     </div>
 
@@ -190,17 +203,31 @@ CAD生成       : Deno + TypeScript + Onshape CAD API</code></pre>
     margin-bottom: var(--spacing-xl);
   }
 
-  .techspecs__flow-steps {
+  .techspecs__flow-diagram {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--spacing-sm);
   }
 
-  .flow-item {
+  .flow-branch {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 0.5rem);
+  }
+
+  .flow-branch__alt {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+  }
+
+  .flow-item__box--primary {
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+
+  .flow-item__box--secondary {
+    border-style: dashed;
+    opacity: 0.7;
   }
 
   .flow-item__box {
@@ -272,7 +299,7 @@ CAD生成       : Deno + TypeScript + Onshape CAD API</code></pre>
       grid-template-columns: 1fr;
     }
 
-    .techspecs__flow-steps {
+    .techspecs__flow-diagram {
       flex-direction: column;
       align-items: flex-start;
     }
