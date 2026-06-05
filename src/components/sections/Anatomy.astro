@@ -6,6 +6,7 @@ import TechCard from '@/components/ui/TechCard.astro';
 <section id="anatomy" class="section section--secondary">
   <div class="container">
     <SectionTitle title="解剖学的設計の核心" />
+    <p class="anatomy__disclaimer">本記述は独学・個人的考察に基づいており、医学的正確性を保証しません。</p>
 
     <div class="anatomy__grid">
       <TechCard data-aos="fade-up">
@@ -41,6 +42,13 @@ import TechCard from '@/components/ui/TechCard.astro';
 </section>
 
 <style>
+  .anatomy__disclaimer {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.7;
+  }
+
   .anatomy__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
