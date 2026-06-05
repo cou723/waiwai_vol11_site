@@ -1,6 +1,4 @@
 ---
-import WristAngleDiagram from '@/components/diagrams/WristAngleDiagram.astro';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import TechCard from '@/components/ui/TechCard.astro';
 ---
@@ -23,7 +21,6 @@ import TechCard from '@/components/ui/TechCard.astro';
           各スイッチをMP関節の法線方向に向けること自体は平面配置でも可能です。しかし、スイッチごとに傾きが異なると打鍵面に段差が生じます。<strong>「最適な角度」と「段差のない打鍵面」を両立するために、スイッチを3次元空間に配置する必要があります。</strong>
         </p>
         <p>高さ・前後傾・左右傾の4軸を個人の手の形に合わせて調整します。</p>
-        <ImagePlaceholder caption="平面配置で法線方向に向けた場合の打鍵面の段差と、立体配置で段差をゼロにした状態を比較する図" />
       </TechCard>
 
       <TechCard data-aos="fade-up" data-aos-delay="160">
@@ -38,8 +35,6 @@ import TechCard from '@/components/ui/TechCard.astro';
         <p>
           手根関節を伸展した状態（手首を反らせた状態）でMP・PIP・DIP関節を繰り返し動かすと腱鞘炎の原因になります。PAG3Bは手根関節が自然な軽屈曲状態でキーを操作できる<strong>後傾角（Backward-tilting）</strong>を採用します。
         </p>
-        <WristAngleDiagram />
-        <ImagePlaceholder caption="手根関節が伸展した状態と軽屈曲状態の比較、およびPAG3Bの後傾角を表す図" />
       </TechCard>
     </div>
   </div>

@@ -33,7 +33,8 @@ export interface TechSpec {
   label: string;
   value: string;
   details?: string[];
-  reference?: { text: string; href: string };
+  image?: { src: string; alt: string };
+  references?: { text: string; href: string }[];
 }
 
 export interface AcronymEntry {
@@ -147,6 +148,10 @@ export const techSpecs: TechSpec[] = [
   {
     label: "スイッチ配置",
     value: "ジグザグ方式",
+    image: {
+      src: "/zigzag-switch-arrangement.jpg",
+      alt: "スイッチがジグザグに上下配置され、キーキャップの足の長さで打鍵面を水平に揃えている断面",
+    },
     details: [
       "奇数行（1・3行目）：低い位置",
       "偶数行（2・4行目）：高い位置",
@@ -162,15 +167,25 @@ export const techSpecs: TechSpec[] = [
   {
     label: "配線方式",
     value: "PCBレス（より線にスイッチとダイオードを直接刺す）",
+    image: {
+      src: "/pcbless-wiring.jpg",
+      alt: "より線にスイッチとダイオードを直接刺したPCBレス配線の様子",
+    },
     details: [
       "PCB・フレキ製造コストがゼロ",
       "基板製造の待ち時間なしに即プロトタイプできる",
       "筐体の3D形状に対して自由度の高い配線が可能",
     ],
-    reference: {
-      text: "50an6xy06r6n/hotswap_pcb_generator",
-      href: "https://github.com/50an6xy06r6n/hotswap_pcb_generator",
-    },
+    references: [
+      {
+        text: "AndyChiu/hotswap_pcb_generator",
+        href: "https://github.com/AndyChiu/hotswap_pcb_generator",
+      },
+      {
+        text: "50an6xy06r6n/hotswap_pcb_generator",
+        href: "https://github.com/50an6xy06r6n/hotswap_pcb_generator",
+      },
+    ],
   },
 ];
 

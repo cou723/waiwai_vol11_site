@@ -1,6 +1,4 @@
 ---
-import ZigzagSwitchDiagram from '@/components/diagrams/ZigzagSwitchDiagram.astro';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import TechCard from '@/components/ui/TechCard.astro';
 import { techSpecs } from '@/data/content';
@@ -30,22 +28,27 @@ import type { TechSpec } from '@/data/content';
                 ))}
               </ul>
             )}
-            {spec.reference && (
+            {spec.image && (
+              <figure class="techspecs__card-figure">
+                <img src={spec.image.src} alt={spec.image.alt} class="techspecs__card-img" />
+              </figure>
+            )}
+            {spec.references && (
               <p class="techspecs__reference">
                 参考実装：
-                <a href={spec.reference.href} target="_blank" rel="noopener noreferrer">
-                  {spec.reference.text}
-                </a>
+                {spec.references.map((ref, i) => (
+                  <>
+                    <a href={ref.href} target="_blank" rel="noopener noreferrer">
+                      {ref.text}
+                    </a>
+                    {i < spec.references!.length - 1 && '、'}
+                  </>
+                ))}
               </p>
             )}
           </TechCard>
         ))
       }
-    </div>
-
-    <div class="techspecs__zigzag-figure" data-aos="fade-up">
-      <ZigzagSwitchDiagram />
-      <ImagePlaceholder caption="スイッチがジグザグに上下配置され、キーキャップの足の長さで打鍵面を水平に揃えている断面を表す図" />
     </div>
 
     <div class="techspecs__stack" data-aos="fade-up">
@@ -175,12 +178,14 @@ CAD生成       : Deno + TypeScript + Onshape CAD API</code></pre>
     margin-bottom: var(--spacing-md);
   }
 
-  .techspecs__zigzag-figure {
-    margin-bottom: var(--spacing-xl);
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+  .techspecs__card-figure {
+    margin: var(--spacing-md) 0 0;
+  }
+
+  .techspecs__card-img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    display: block;
   }
 
   .techspecs__stack {
